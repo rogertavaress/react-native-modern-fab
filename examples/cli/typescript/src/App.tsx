@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 import {
-  StyleSheet,
   View,
   StatusBar,
   Image, Text
@@ -16,25 +15,17 @@ const App = () => {
     {key: '2', component: <Text>Item 2</Text>},
     {key: '3', component: <Text>Item 3</Text>},
     {key: '4', component: <Text>Item 4</Text>},
-  ]),[])
+  ]),[]);
 
   return (
     <>
       <StatusBar barStyle="light-content" />
-      <View>
+      <View style={{flex: 1}}>
         <Image source={backgroundImg} resizeMethod="resize" resizeMode="contain" />
       </View>
       <FAB list={list} backgroundColor="#ffffffcc" buttonColor="#ffa500" icon={<Image source={plusImg} />} />
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  Container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-});
 
 export default App;

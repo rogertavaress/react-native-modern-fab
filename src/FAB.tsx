@@ -1,33 +1,9 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { Animated, View, StyleSheet, Dimensions } from 'react-native';
+import { Animated, View } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
-// import { Feather } from '@expo/vector-icons';
-
-const styles = StyleSheet.create({
-  Container: {
-    position: 'absolute',
-    height: Dimensions.get('window').height,
-    width: Dimensions.get('window').width,
-  },
-  Items: {
-    position: 'absolute',
-    bottom: 150,
-    right: 20,
-  },
-  Item: {
-    marginBottom: 10,
-  },
-  FABButton: {
-    position: 'absolute',
-    width: 58,
-    height: 58,
-    bottom: 60,
-    right: 20,
-    borderRadius: 29,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
+import styles from './styles';
+import closeItems from './tools/closeItems';
+import showItems from './tools/showItems';
 
 interface FABProps {
   list: { key: string; component: JSX.Element }[];
@@ -57,46 +33,25 @@ const FAB: React.FC<FABProps> = ({ list, icon, backgroundColor = '#ffffffee', bu
     return itemsList;
   }, [list]);
 
-  const showItems = useCallback(() => {
-    setIsShow(true);
-    const itemsAnimated: Animated.CompositeAnimation[] = [];
-    itemsData.forEach((element) => {
-      itemsAnimated.push(
-        Animated.timing(element.animated, {
-          toValue: 1,
-          duration: 50,
-          useNativeDriver: true,
-        }),
-      );
+  const handleShowItems = useCallback(() => {
+    showItems(itemsData, () => {
+      setIsShow(true);
     });
-
-    Animated.sequence(itemsAnimated.reverse()).start();
   }, [itemsData]);
 
-  const closeItems = useCallback(() => {
-    const itemsAnimated: Animated.CompositeAnimation[] = [];
-    itemsData.forEach((element) => {
-      itemsAnimated.push(
-        Animated.timing(element.animated, {
-          toValue: 0,
-          duration: 50,
-          useNativeDriver: true,
-        }),
-      );
-    });
-
-    Animated.sequence(itemsAnimated).start(() => {
+  const handleCloseItems = useCallback(() => {
+    closeItems(itemsData, () => {
       setIsShow(false);
     });
   }, [itemsData]);
 
   const handlePressButton = useCallback(() => {
     if (isShow) {
-      closeItems();
+      handleCloseItems();
     } else {
-      showItems();
+      handleShowItems();
     }
-  }, [closeItems, showItems, isShow]);
+  }, [handleCloseItems, handleShowItems, isShow]);
 
   return (
     <>
@@ -112,10 +67,7 @@ const FAB: React.FC<FABProps> = ({ list, icon, backgroundColor = '#ffffffee', bu
         </View>
       )}
       <RectButton onPress={handlePressButton} style={{ ...styles.FABButton, backgroundColor: buttonColor }}>
-        <View>
-          {/* <Feather name={icon} size={30} color={iconColor} /> */}
-          {icon}
-        </View>
+        <View>{icon}</View>
       </RectButton>
     </>
   );

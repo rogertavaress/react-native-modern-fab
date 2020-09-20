@@ -15,4 +15,4 @@ export interface ItemList {
     animated: Animated.Value;
 }
 declare const FAB: React.FC<FABProps>;
-export { FAB };
+export default FAB;

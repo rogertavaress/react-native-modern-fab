@@ -18,6 +18,11 @@ export default [
         format: 'es',
         banner: '/* eslint-disable */',
       },
+      {
+        file: 'examples/expo/typescriptExpo/src/lib/react-native-modern-fab/index.js',
+        format: 'es',
+        banner: '/* eslint-disable */',
+      },
     ],
   },
 ];

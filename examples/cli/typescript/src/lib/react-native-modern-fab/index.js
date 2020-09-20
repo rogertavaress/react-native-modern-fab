@@ -29,7 +29,6 @@ var __assign = function() {
     return __assign.apply(this, arguments);
 };
 
-// import { Feather } from '@expo/vector-icons';
 var styles = StyleSheet.create({
     Container: {
         position: 'absolute',
@@ -55,6 +54,35 @@ var styles = StyleSheet.create({
         alignItems: 'center',
     },
 });
+
+var closeItems = function (items, callback) {
+    var itemsAnimated = [];
+    items.forEach(function (element) {
+        itemsAnimated.push(Animated.timing(element.animated, {
+            toValue: 0,
+            duration: 50,
+            useNativeDriver: true,
+        }));
+    });
+    Animated.sequence(itemsAnimated).start(function () {
+        callback();
+    });
+};
+
+var showItems = function (items, callback) {
+    // setIsShow(true);
+    callback();
+    var itemsAnimated = [];
+    items.forEach(function (element) {
+        itemsAnimated.push(Animated.timing(element.animated, {
+            toValue: 1,
+            duration: 50,
+            useNativeDriver: true,
+        }));
+    });
+    Animated.sequence(itemsAnimated.reverse()).start();
+};
+
 var FAB = function (_a) {
     var list = _a.list, icon = _a.icon, _b = _a.backgroundColor, backgroundColor = _b === void 0 ? '#ffffffee' : _b, _c = _a.buttonColor, buttonColor = _c === void 0 ? '#ff8a62' : _c;
     var _d = useState(false), isShow = _d[0], setIsShow = _d[1];
@@ -69,39 +97,24 @@ var FAB = function (_a) {
         });
         return itemsList;
     }, [list]);
-    var showItems = useCallback(function () {
-        setIsShow(true);
-        var itemsAnimated = [];
-        itemsData.forEach(function (element) {
-            itemsAnimated.push(Animated.timing(element.animated, {
-                toValue: 1,
-                duration: 50,
-                useNativeDriver: true,
-            }));
+    var handleShowItems = useCallback(function () {
+        showItems(itemsData, function () {
+            setIsShow(true);
         });
-        Animated.sequence(itemsAnimated.reverse()).start();
     }, [itemsData]);
-    var closeItems = useCallback(function () {
-        var itemsAnimated = [];
-        itemsData.forEach(function (element) {
-            itemsAnimated.push(Animated.timing(element.animated, {
-                toValue: 0,
-                duration: 50,
-                useNativeDriver: true,
-            }));
-        });
-        Animated.sequence(itemsAnimated).start(function () {
+    var handleCloseItems = useCallback(function () {
+        closeItems(itemsData, function () {
             setIsShow(false);
         });
     }, [itemsData]);
     var handlePressButton = useCallback(function () {
         if (isShow) {
-            closeItems();
+            handleCloseItems();
         }
         else {
-            showItems();
+            handleShowItems();
         }
-    }, [closeItems, showItems, isShow]);
+    }, [handleCloseItems, handleShowItems, isShow]);
     return (React.createElement(React.Fragment, null,
         isShow && (React.createElement(View, { style: __assign(__assign({}, styles.Container), { backgroundColor: backgroundColor }) },
             React.createElement(View, { style: styles.Items }, itemsData.map(function (_a) {
