@@ -1,7 +1,7 @@
 {
   "name": "react-native-modern-fab",
-  "version": "0.0.1",
-  "description": "",
+  "version": "1.0.0",
+  "description": "A simple floating action button for Android and IOS.",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
@@ -14,7 +14,7 @@
   },
   "author": {
     "name": "Rogério Tavares",
-    "email": "rogerioctf@gmail.com",
+    "email": "contact@rogeriotavares.dev",
     "url": "https://www.rogeriotavares.dev"
   },
   "devDependencies": {
@@ -38,11 +38,9 @@
     "typescript": "^3.8.3"
   },
   "peerDependencies": {
-    "@expo/vector-icons": "^10.2.1",
     "react": "^16.13.1",
     "react-native": "ˆ0.63.2",
-    "react-native-gesture-handler": "~1.6.0",
-    "react-native-vector-icons": "^7.1.0"
+    "react-native-gesture-handler": "~1.6.0"
   },
   "scripts": {
     "build": "rollup -c",
@@ -65,7 +63,8 @@
     "react",
     "react-native",
     "floating-action-button",
-    "FAB"
+    "FAB",
+    "material-design"
   ],
   "license": "MIT"
 }
