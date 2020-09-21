@@ -1,6 +1,6 @@
 {
   "name": "react-native-modern-fab",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A simple floating action button for Android and IOS.",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
@@ -57,9 +57,6 @@
     "dist"
   ],
   "dependencies": {},
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
   "keywords": [
     "react",
     "react-native",
