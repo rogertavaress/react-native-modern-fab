@@ -2,6 +2,8 @@
 
 React Native Modern FAB is a button component built with Typescript for React Native CLI and React Native Expo.
 
+![Screenshot](.github/screens/screen1.gif)
+
 ## Installation
 
 Use the package manager [npm](https://www.npmjs.com/get-npm) or [yarn](https://classic.yarnpkg.com/en/docs/install) to install **react-native-modern-fab**.
