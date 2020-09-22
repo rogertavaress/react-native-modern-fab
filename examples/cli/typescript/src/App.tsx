@@ -2,7 +2,8 @@ import React, { useMemo } from 'react';
 import {
   View,
   StatusBar,
-  Image, Text
+  Image, 
+  Text,
 } from 'react-native';
 import FAB from './lib/react-native-modern-fab';
 
